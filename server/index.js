@@ -19,7 +19,20 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // Middleware
 app.use(express.json());
+pp.use(
+  cors({
+    origin: [process.env.FRONTEND_URL, "http://localhost:5173"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
 
+app.get("/", (req, res) => {
+  res.json({
+    success: true,
+    message: "Working",
+  });
+});
 // Database Connection
 // Replace with your MongoDB connection string in production
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/elegant-store';
