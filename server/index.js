@@ -19,7 +19,6 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // Middleware
 app.use(express.json());
-app.use(cors());
 
 // Database Connection
 // Replace with your MongoDB connection string in production
