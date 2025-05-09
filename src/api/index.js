@@ -1,7 +1,9 @@
 import axios from 'axios';
 
+const server = "https://sample-njvf.onrender.com"
+
 const api = axios.create({
-  baseURL: '/api',
+  baseURL: `${server}/api`,
   headers: {
     'Content-Type': 'application/json',
   },
