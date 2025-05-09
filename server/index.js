@@ -19,19 +19,16 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // Middleware
 app.use(express.json());
-pp.use(
+app.use(
   cors({
-    origin: [process.env.FRONTEND_URL, "http://localhost:5173"],
+    origin: [process.env.FRONTEND_URL],
     methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true,
+    credentials: true, 
   })
 );
 
 app.get("/", (req, res) => {
-  res.json({
-    success: true,
-    message: "Working",
-  });
+  res.send("Working");
 });
 // Database Connection
 // Replace with your MongoDB connection string in production
