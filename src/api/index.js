@@ -88,11 +88,12 @@ export const userLogin = async (email, password) => {
     },
   };
   try {
-    const response = await axios.post(
-      `/api/user/login`,
+    const response = await api.post(
+      `/user/login`,
       { email, password },
       config
     );
+    console.log(response)
     return response.data;
   } catch (err) {
     console.log(err);
