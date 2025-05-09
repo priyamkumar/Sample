@@ -4,6 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Box } from "@mui/material";
 import Loader from "./Loader";
+import { userLogin } from "../api";
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -27,25 +28,16 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { email, password } = formData;
-    setLoading(true);
-    const config = {
-      headers: {
-        "Content-type": "application/json",
-      },
-    };
     try {
-      const { data } = await axios.post(
-        `/api/user/login`,
-        { email, password },
-        config
-      );
+      setLoading(true);
+      const data = await userLogin(email, password);
       setUser(data);
       localStorage.setItem("userInfo", JSON.stringify(data));
-      setLoading(false);
       navigate("/admin");
     } catch (err) {
-      setLoading(false);
       console.log(err);
+    } finally {
+      setLoading(false);
     }
   };
 
