@@ -13,31 +13,23 @@ const Products = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [activeCategory, setActiveCategory] = useState('all');
 
+  const fetchProducts = async () => {
+    try {
+      setLoading(true);
+      const res = await getProducts()
+      const mockProducts = res.products;
+      setProducts(mockProducts);
+      setError(null);
+    } catch (err) {
+      console.error('Error fetching products:', err);
+      setError('Failed to load products. Please try again later.');
+    } finally {
+      setLoading(false);
+    }
+  };
   // Sample product categories
   const categories = ['all', 'electronics', 'home', 'fashion', 'accessories'];
-
   useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        setLoading(true);
-        
-        // In a real app, this would be fetched from your MongoDB backend
-        // For demo purposes, we'll use a mock data approach
-        // Simulating API delay
-        
-        // Mock product data
-        const res = await getProducts()
-        const mockProducts = res.products
-        setProducts(mockProducts);
-        setError(null);
-      } catch (err) {
-        console.error('Error fetching products:', err);
-        setError('Failed to load products. Please try again later.');
-      } finally {
-        setLoading(false);
-      }
-    };
-    
     fetchProducts();
   }, []);
 
